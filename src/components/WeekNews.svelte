@@ -54,7 +54,7 @@
     
     <div class="flex w-full p-4 sm:p-6 {current ? "bg-blue-950" : "bg-white/10"}">
         <div class="grid gap-2 sm:gap-6 sm:flex items-center">
-            <h1 class="text-2xl">Week {week}/{year}</h1>
+            <h1 class="text-2xl"><a href={data.published} class="{!data.published ? 'no-underline' : ''}">Week {week}/{year}</a></h1>
             <div class="text-xl {current ? "text-white/50" : ""}">{format(weekStart, "MMM d")} - {format(weekEnd, "MMM d, yyyy")}</div>
             {#if current}
                 <div class="text-white">🚧 Current week</div>
