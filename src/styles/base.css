@@ -2,7 +2,7 @@
 
 @layer components {
     body {
-        @apply bg-black;
+        @apply bg-black font-mono;
     }
     body, p, div {
         @apply text-[#909090];
