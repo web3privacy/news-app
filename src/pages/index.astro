@@ -6,6 +6,6 @@ import WeekNews from '../components/WeekNews.svelte';
 ---
 
 <BaseLayout>
-	<WeekNews year="2024" week="06" client:load />
+	<WeekNews year="2024" week="06" current={true} client:load />
 	<WeekNews year="2024" week="05" client:load />
 </BaseLayout>

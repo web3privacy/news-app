@@ -9,6 +9,7 @@
 
     export let year = "2024";
     export let week = "05";
+    export let current = false;
 
     onMount(async () => {
 		const res = await fetch(`https://raw.githubusercontent.com/web3privacy/news/main/src/${year}/week${week}.yaml`);
@@ -33,21 +34,24 @@
 
 </script>
 
-<div class="mb-14 border border-white/20">
+<div class="mb-8 border {current ? "border-dashed border-blue-950" : "border-white/20"}">
     
-    <div class="flex w-full p-6 bg-white/10">
-        <div class="flex items-center gap-6">
+    <div class="flex w-full p-4 sm:p-6 {current ? "bg-blue-950" : "bg-white/10"}">
+        <div class="grid gap-2 sm:gap-6 sm:flex items-center">
             <h1 class="text-2xl">Week {week}/{year}</h1>
-            <div class="text-xl">{format(weekStart, "MMM d")} - {format(weekEnd, "MMM d, yyyy")}</div>
+            <div class="text-xl {current ? "text-white/50" : ""}">{format(weekStart, "MMM d")} - {format(weekEnd, "MMM d, yyyy")}</div>
+            {#if current}
+                <div class="text-white">🚧 Current week</div>
+            {/if}
         </div>
         <div class="grow"></div>
-        <div>
+        <div class="">
             <a href="https://github.com/web3privacy/news/edit/main/src/{year}/week{week}.yaml">Edit</a>
         </div>
     </div>
 
     {#if data?.news}
-        <div class="p-6">
+        <div class="p-4 sm:p-6">
             {#each cats as cat}
                 <div class="mb-6">
                     <h2 class="mb-4 text-xl">{cat}</h2>
