@@ -18,10 +18,17 @@
         if (!data.news) {
             return null
         }
+        let uncat = false
         for (const item of data.news) {
             if (item.cat && !cats.includes(item.cat)) {
                 cats = [...cats, item.cat]
             }
+            if (!item.cat) {
+                uncat = true
+            }
+        }
+        if (uncat) {
+            cats = [...cats, "uncategorized"]
         }
 	});
 
@@ -56,7 +63,7 @@
                 <div class="mb-6">
                     <h2 class="mb-4 text-xl">{cat}</h2>
                     <ul class="list-disc">
-                        {#each data.news.filter(n => n.cat === cat) as item}
+                        {#each data.news.filter(n => (cat === "uncategorized" ? !n.cat : n.cat === cat)) as item}
                             <li class="ml-6 news-item">
                                 {@html marked.parseInline(item.text)}
                                 {#if item.src}
