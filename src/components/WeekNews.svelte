@@ -69,7 +69,7 @@
                     <h2 class="mb-4 text-xl">{config.cats[cat] ? config.cats[cat].title : capitalizeFirstLetter(cat)}</h2>
                     <ul class="list-disc">
                         {#each data.news.filter(n => (cat === "uncategorized" ? !n.cat : n.cat === cat)) as item}
-                            <li class="ml-6 news-item">
+                            <li class="ml-6 news-item mb-2">
                                 {@html marked.parseInline(item.text)}
                                 {#if item.src}
                                     <span class="news-item-source text-white/20">(<a href={item.src} class="text-white/20">src</a>)</span>
