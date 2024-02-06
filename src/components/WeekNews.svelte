@@ -7,14 +7,18 @@
 
     let data = {};
     let cats = [];
+    let ghData = {};
 
     export let year = "2024";
     export let week = "05";
     export let current = false;
 
     onMount(async () => {
-		const res = await fetch(`https://raw.githubusercontent.com/web3privacy/news/main/src/${year}/week${week}.yaml`);
-		const yamlData = await res.text();
+		//const res = await fetch(`https://raw.githubusercontent.com/web3privacy/news/main/src/${year}/week${week}.yaml`);
+        const res = await fetch(`https://api.github.com/repos/web3privacy/news/contents/src/${year}/week${week}.yaml`)
+		//const yamlData = await res.text();
+        ghData = await res.json();
+        const yamlData = atob(ghData.content);
         data = yaml.load(yamlData);
         if (!data.news) {
             return null
@@ -84,6 +88,7 @@
         <!--div class="mt-6 text-sm p-4 bg-white/10">
             <div>News count: {data.news?.length}</div>
             <div>Categories: {cats.join(', ')}</div>
+            <div>{JSON.stringify(ghData.sha)}</div>
         </div-->
     {:else}
         <div class="mt-4 p-6">Loading week ..</div>
