@@ -3,6 +3,7 @@
     import yaml from 'js-yaml';
     import { marked } from 'marked';
     import { setWeek, nextMonday, format, addDays } from 'date-fns';
+    import * as config from '../config.yaml';
 
     let data = {};
     let cats = [];
@@ -39,6 +40,10 @@
     const weekEnd = addDays(weekStart, 6);
     //const weekStartDa
 
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
 </script>
 
 <div class="mb-8 border {current ? "border-dashed border-blue-950" : "border-white/20"}">
@@ -61,7 +66,7 @@
         <div class="p-4 sm:p-6">
             {#each cats as cat}
                 <div class="mb-6">
-                    <h2 class="mb-4 text-xl">{cat}</h2>
+                    <h2 class="mb-4 text-xl">{config.cats[cat] ? config.cats[cat].title : capitalizeFirstLetter(cat)}</h2>
                     <ul class="list-disc">
                         {#each data.news.filter(n => (cat === "uncategorized" ? !n.cat : n.cat === cat)) as item}
                             <li class="ml-6 news-item">
