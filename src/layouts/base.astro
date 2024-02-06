@@ -1,0 +1,27 @@
+---
+import '../styles/base.css';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>What's new in web3 privacy?</title>
+	</head>
+	<body>
+        <div class="m-10">
+            <div class="flex w-full">
+		        <h1 class="text-4xl">What's new in web3 privacy?</h1>
+                <div class="grow"></div>
+                <div>
+                    <a href="https://github.com/web3privacy/news">GitHub</a>
+                </div>
+            </div>
+            <div class="mt-10">
+                <slot />
+            </div>
+        </div>
+	</body>
+</html>
