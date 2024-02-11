@@ -4,6 +4,7 @@
     import { marked } from 'marked';
     import { setWeek, nextMonday, format, addDays } from 'date-fns';
     import * as config from '../config.yaml';
+    import { encode, decode } from '@frsource/base64';
 
     let data = {};
     let cats = [];
@@ -14,11 +15,9 @@
     export let current = false;
 
     onMount(async () => {
-		//const res = await fetch(`https://raw.githubusercontent.com/web3privacy/news/main/src/${year}/week${week}.yaml`);
         const res = await fetch(`https://api.github.com/repos/web3privacy/news/contents/src/${year}/week${week}.yaml`)
-		//const yamlData = await res.text();
         ghData = await res.json();
-        const yamlData = atob(ghData.content);
+        const yamlData = decode(ghData.content);
         data = yaml.load(yamlData);
         if (!data.news) {
             return null
@@ -70,7 +69,7 @@
         <div class="p-4 sm:p-6">
             {#each cats as cat}
                 <div class="mb-6">
-                    <h2 class="mb-4 text-xl">{config.cats[cat] ? config.cats[cat].title : capitalizeFirstLetter(cat)}</h2>
+                    <h3 class="mb-4 text-xl">{config.cats[cat] ? config.cats[cat].title : capitalizeFirstLetter(cat)}</h3>
                     <ul class="list-disc">
                         {#each data.news.filter(n => (cat === "uncategorized" ? !n.cat : n.cat === cat)) as item}
                             <li class="ml-6 news-item mb-2">
